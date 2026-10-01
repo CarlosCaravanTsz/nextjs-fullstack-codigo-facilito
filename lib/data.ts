@@ -34,6 +34,10 @@ export async function getHomeworkById(id: string): Promise<Homework> {
     });
 }
 
+export function getHomeworkByIdLive(id: string): Homework | undefined {
+    return homeworks.find(homework => homework.id === id);
+}
+
 export async function deleteHomeWork(id: string): Promise<boolean> {
     const before = homeworks.length;
     // Mutacion

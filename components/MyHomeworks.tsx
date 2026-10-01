@@ -48,6 +48,20 @@ const MyHomeworks = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const handleOnToggle = (id: string, completed: boolean) => {
+    setResults((prev) =>
+      prev
+        ? prev.map((item) => (item.id === id ? { ...item, completed } : item))
+        : prev,
+    );
+  };
+
+  const handleOnDelete = (id: string) => {
+    setResults((prev) =>
+      prev ? prev.filter((homework) => homework.id !== id) : prev,
+    );
+  };
+
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
       <div className="flex gap-3 mb-8">
@@ -68,7 +82,11 @@ const MyHomeworks = ({ children }: { children: ReactNode }) => {
       {isPendingSearch ? (
         <div className="animate-pulse text-sm text-gray-400">Cargando...</div>
       ) : results !== null ? (
-        <HomeworkItems homeworks={results} />
+        <HomeworkItems
+          homeworks={results}
+          onToggle={handleOnToggle}
+          onDelete={handleOnDelete}
+        />
       ) : (
         <Suspense
           fallback={

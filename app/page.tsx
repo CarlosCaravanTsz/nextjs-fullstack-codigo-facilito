@@ -13,10 +13,3 @@ export default function Home() {
     </div>
   );
 }
-
-/**
- *
- * <div>
- *   el contenido que tiene ese tag, es conocido como children
- * </div>
- */
