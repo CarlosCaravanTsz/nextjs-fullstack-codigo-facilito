@@ -1,4 +1,4 @@
-import { getHomeworks } from "@/lib/data";
+import { getHomeworks } from "@/lib/homeworks";
 import HomeworkItems from "./HomeworkItems";
 
 const HomeworkList = async () => {

@@ -1,16 +1,17 @@
 "use server";
 
 import { updateTag } from "next/cache";
-import { deleteHomeWork as deleteHomeworkFromDB, getHomeworkByIdLive, updateHomework } from "./data";
+import { deleteHomework as deleteHomeworkFromDB, getHomework, updateHomework } from "./homeworks";
 
 export async function toggleHomework(id: string, completed: boolean) {
-    const homework = getHomeworkByIdLive(id);
+    const homework = getHomework(id);
 
     if (!homework) {
         throw new Error("Homework not found");
     }
 
-    const updated = updateHomework({ ...homework, completed });
+    // TODO tarea, actualizar el title
+    const updated = updateHomework(id, { ...homework, completed });
    
     updateTag("getHomeworks");
     updateTag("getHomeworkById");
@@ -19,7 +20,7 @@ export async function toggleHomework(id: string, completed: boolean) {
 };
 
 export async function deleteHomework(id: string) {
-    const homework = getHomeworkByIdLive(id);
+    const homework = getHomework(id);
 
     if (!homework) {
         throw new Error("Homework not found");

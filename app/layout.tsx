@@ -26,12 +26,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <header className="p-4 border-b">
+        <header className="sticky top-0 z-10 border-b border-gray-200/80 bg-white/70 px-6 py-4 backdrop-blur-md dark:border-gray-800/80 dark:bg-gray-950/70">
           <Link href="/home" className="font-bold">
             Mis Tareas
           </Link>
         </header>
         {children}
+        <footer className="mt-auto border-t border-gray-200/80 bg-white/70 px-6 py-4 text-center text-sm text-gray-500 backdrop-blur-md dark:border-gray-800/80 dark:bg-gray-950/70 dark:text-gray-400">
+          <span className="bg-gradient-to-r from-sky-500 to-emerald-500 bg-clip-text font-semibold text-transparent">
+            Mis Tareas - Codigo Facilito
+          </span>
+        </footer>
       </body>
     </html>
   );
