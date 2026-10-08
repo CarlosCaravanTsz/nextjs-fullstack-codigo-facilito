@@ -1,8 +1,9 @@
-import { supabase } from "./supabase";
+import { createClient } from "./supabase/server";
 import { Homework } from "./data";
 
 export async function getHomeworks(): Promise<Homework[] | null> {
     try {
+        const supabase = await createClient();
         const { data, error } = await 
             supabase
                 .from("homeworks")
@@ -22,6 +23,7 @@ export async function getHomeworks(): Promise<Homework[] | null> {
 
 export async function getHomework(id: string): Promise<Homework | undefined | string> {
     try {
+        const supabase = await createClient();
         const { data, error, status, statusText } = await supabase
             .from("homeworks")
             .select("*")
@@ -41,6 +43,7 @@ export async function getHomework(id: string): Promise<Homework | undefined | st
 
 export async function createHomework(title: string): Promise<Homework | undefined> {
     try {
+        const supabase = await createClient();
         const { data, error } = await supabase
             .from("homeworks")
             .insert({ title })
@@ -60,6 +63,7 @@ export async function createHomework(title: string): Promise<Homework | undefine
 
 export async function deleteHomework(id: string): Promise<boolean> {
     try {
+        const supabase = await createClient();
         const { error } = await supabase.from("homeworks").delete().eq("id", id);
 
         return !error;
@@ -74,6 +78,7 @@ export async function updateHomework(
     changes: Partial<Pick<Homework, "title" | "completed">>,
 ): Promise<Homework | undefined> {
     try {
+        const supabase = await createClient();
         const { error, data } = await supabase
             .from("homeworks")
             .update(changes)
@@ -94,6 +99,7 @@ export async function updateHomework(
 
 export async function getHomeworksByTitle(title: string): Promise<Homework[] | undefined> {
     try {
+        const supabase = await createClient();
         const { data, error } = await supabase
             .from("homeworks")
             .select("*")
